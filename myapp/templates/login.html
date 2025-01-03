@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log-In ICpEPHUB</title>
+    <link rel="stylesheet" href="{% static 'css/access.css' %}">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header Section with Home Link -->
+    <header class="header">
+        <a href="{% url 'home' %}" class="home-link">Home</a>
+    </header>
+
+    <!-- Login Form Wrapper -->
+    <div class="wrapper">
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <h1>Welcome to ICpEPHUB</h1>
+            <p class="subtitle">Login to access your account</p>
+
+            <!-- Email Input Field -->
+            <div class="input-box">
+                <i class="bx bxs-envelope"></i>
+                <input type="email" class="form-control" name="email" placeholder="Email" required>
+            </div>
+
+
+            <!-- Password Input Field -->
+            <div class="input-box">
+                <i class='bx bxs-lock-alt'></i>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="togglePassword">
+                <label class="form-check-label" for="togglePassword">Show Password</label>
+            </div>
+
+            <!-- Login Button -->
+            <button type="submit" class="btn">Login</button>
+            
+            <!-- Link to Sign-Up Page -->
+            <div class="auth-link">
+                <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

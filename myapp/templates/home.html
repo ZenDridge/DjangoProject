@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICpEP Hub</title>
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+    <link rel="stylesheet" href="{% static 'css/officers.css' %}">
+    <link rel="stylesheet" href="{% static 'css/event.css' %}">
+</head>
+
+<body style="margin: 0; overflow-x: hidden;">
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="left">
+            <img src="{% static 'assets/images/icpeplogo.jpg' %}" class="logo" alt="ICpEP Logo">
+            ICpEP HUB
+        </div>
+        <div class="center">
+            <div id="openModal" class="about-button">ABOUT US</div>
+            <div class="contact-button">
+                <span>CONTACT US</span>
+                <div class="icons">
+                    <a href="https://www.facebook.com/icpep.psu" title="Facebook Page">
+                        <img src="{% static 'assets/images/facebook.png' %}" alt="Facebook Icon" class="icon">
+                    </a>
+                    <a href="mailto:icpep_psu.se@psu.edu.ph" title="Email Us">
+                        <img src="{% static 'assets/images/envelope.png' %}" alt="Email Icon" class="icon">
+                    </a>
+                    <a href="tel:+1234567890" title="Call Us">
+                        <img src="{% static 'assets/images/phone.png' %}" class="icon">
+                    </a>
+                </div>                
+            </div>
+        </div>
+        <div class="right">
+            <a href="{% url 'login' %}" class="start-button">Login</a>
+        </div>
+    </nav>
+
+    <!-- Frontline Section -->
+    <header class="frontline">
+        <h1>Institute of Computer Engineers of the Philippines</h1>
+        <h2>Empowering the Future of Technology</h2>
+        <p>Be a Part of a Thriving Community of Innovators</p>
+        <a href="{% url 'signup' %}" class="btn-join">Join Our Community Today</a>
+    </header>
+
+    <!-- Event Section -->
+    <main>
+    <nav> 
+        <section class="events-nav">
+            <h1>RECENT EVENTS/ANNOUNCEMENTS</h1>
+        </section>
+    </nav> 
+
+        <section class="events">
+            <h2 class="event-section-title">Stay Updated on the Latest Trends in Computer Engineering</h2>
+            <div class="event-cards">
+                <!-- Event Card 1 -->
+                <div class="event-card">
+                    <img src="{% static 'assets/images/merch.jpg' %}" alt="Event Image 1">
+                    <h3>THE CPE MERCH PRE ORDER PERIOD IS EXTENDED!</h3>
+                    <div class="event-details">
+                        <a href="https://www.facebook.com/share/p/15gtvWi3K3/" target="_blank">View Full Details</a>
+                    </div>
+                </div>
+
+                <!-- Event Card 2 -->
+                <div class="event-card">
+                    <img src="{% static 'assets/images/bonifacio.jpg' %}" alt="Event Image 2">
+                    <h3>REMEMBERING ANDRES BONIFACIO: A TRUE REVOLUTIONARY</h3>
+                    <div class="event-details">
+                        <a href="https://www.facebook.com/share/p/1NEjjpwrvo/" target="_blank">View Full Details</a>
+                    </div>
+                </div>
+
+                <!-- Event Card 3 -->
+                <div class="event-card">
+                    <img src="{% static 'assets/images/tryouts.jpg' %}" alt="Event Image 3">
+                    <h3>CALLING ALL CpE WARRIORS! YOUR TIME TO SHINE IS NOW!</h3>
+                    <div class="event-details">
+                        <a href="https://www.facebook.com/share/p/18TLEweDz9/" target="_blank">View Full Details</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Officers Section -->
+    <nav>   
+        <section class="officers-nav">
+            <h1>ICpEP OFFICERS</h1>
+        </section>
+    </nav> 
+
+        <section class="officers">
+            <h2 class="officer-section-title">Leading ICpEP: Our Team of Officers</h2>
+            <div class="officer-container">
+                <!-- Officer Images -->
+                <div class="officer-frame"><img class="officer-img" src="{% static 'assets/images/ovgovf.jpg' %}" alt="Officer 1"></div>
+                <div class="officer-frame"><img class="officer-img" src="{% static 'assets/images/ogov.jpg' %}" alt="Officer 2"></div>
+                <div class="officer-frame"><img class="officer-img" src="{% static 'assets/images/ovgovm.jpg' %}" alt="Officer 3"></div>
+                <div class="officer-frame"><img class="officer-img" src="{% static 'assets/images/osec.jpg' %}" alt="Officer 4"></div>
+                <div class="officer-frame"><img class="officer-img" src="{% static 'assets/images/oasec.jpg' %}" alt="Officer 5"></div>
+                <div class="officer-frame"><img class="officer-img" src="{% static 'assets/images/otre.jpg' %}" alt="Officer 6"></div>
+                <div class="officer-frame"><img class="officer-img" src="{% static 'assets/images/oatre.jpg' %}" alt="Officer 7"></div>
+                <div class="officer-frame"><img class="officer-img" src="{% static 'assets/images/obm.jpg' %}" alt="Officer 8"></div>
+                <div class="officer-frame"><img class="officer-img" src="{% static 'assets/images/oaud.jpg' %}" alt="Officer 9"></div>
+                <div class="officer-frame"><img class="officer-img" src="{% static 'assets/images/obm1.jpg' %}" alt="Officer 10"></div>
+                <div class="officer-frame"><img class="officer-img" src="{% static 'assets/images/opr.jpg' %}" alt="Officer 11"></div>
+                <div class="officer-frame"><img class="officer-img" src="{% static 'assets/images/opr1.jpg' %}" alt="Officer 12"></div>
+                <div class="officer-frame"><img class="officer-img" src="{% static 'assets/images/otm.jpg' %}" alt="Officer 13"></div>
+                <div class="officer-frame"><img class="officer-img" src="{% static 'assets/images/otm1.jpg' %}" alt="Officer 14"></div>
+                <div class="officer-frame"><img class="officer-img" src="{% static 'assets/images/otm2.jpg' %}" alt="Officer 15"></div>
+            </div>
+            <div class="officer-navigation">
+                <button id="backward" disabled>
+                    <img src="{% static 'assets/images/arrowleft.png' %}" alt="Backward" class="arrow-icon">
+                </button>
+                <button id="forward">
+                    <img src="{% static 'assets/images/arrowright.png' %}" alt="Forward" class="arrow-icon">
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <span>© 2024 Your Company. All rights reserved.</span>
+    </footer>
+    
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h1>ICpEP Hub - ICpEP PSU UC</h1>
+            <p>ICpEP PSU UC is a group of students studying Computer Engineering in Pangasinan State University - Urdaneta City Campus. Our goal is to help each other grow by sharing knowledge and working together on projects. We focus on learning new skills, supporting each other, and preparing for careers in technology. Our team of officers is dedicated to making sure everyone has the opportunity to succeed. We organize events, workshops, and activities to make our community stronger and more connected. Join us and be part of a group that’s excited to learn, grow, and shape the future of technology.</p>
+            <h2>Institute of Computer Engineers of the Philippines</h2>
+            <p>The Institute of Computer Engineers of the Philippines (ICpEP, formerly Philippine Institute of Computer Engineers) is a non-profit professional organization of computer engineers in the Philippines. It is registered under the Securities and Exchange Commission as a non-stock and non-profit organization. ICpEP is also the official computer engineering organization for academic community and industry practitioners in the Philippines.</p>
+            <h3>History</h3>
+            <p>In 1992, a group of computer engineers formed a professional organization for computer engineers, the Philippine Institute of Computer Engineers, or PhICEs. But after years of being active and conducting conventions, seminars, and symposia to fellow computer engineers and students, PhICEs became inactive.</p>
+            <p>In 2008, several computer engineers tried to revive the professional organization after it's been inactive for years. Then the organization was reformed as Institute of Computer Engineers of the Philippines.</p>
+            <h4>History of ICpEP.SE</h4>
+            <p>ICpEP.SE or Institute of Computer Engineers of the Philippines Student Edition, is a student chapter of the ICpEP, which aims to link academics to various colleges and universities. The first group of student chapters started in 2008, it was founded by 11 schools, namely, Adamson University, Asia Pacific College, Central Colleges of the Philippines, De La Salle University, Far Eastern University Institute of Technology, Mapua Institute of Technology, Pamantasan ng Lungsod ng Maynila, Polytechnic University of the Philippines-Manila, STI College-Recto, Technological Institute of the Philippines-Manila, and Technological Institute of the Philippines-Quezon City. And now, there are more than sixty-eight schools across the Philippines that have an ICpEP student chapter.</p>
+            <span id="closeModal" class="modal-close">&times;</span>
+        </div>
+    </div>
+
+    <!-- External JS -->
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Verify Payment - ICpEPHUB{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Payment Verification</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h6>Payment Details</h6>
+                        <p><strong>Member:</strong> {{ membership.user.full_name }}</p>
+                        <p><strong>Submitted:</strong> {{ membership.created_at|date:"F d, Y" }}</p>
+                    </div>
+
+                    {% if membership.payment_proof %}
+                        <div class="mb-4">
+                            <h6>Payment Proof</h6>
+                            <div class="text-center">
+                                <img src="{{ membership.payment_proof.url }}" alt="Payment Proof" class="img-fluid mb-3" style="max-height: 500px;">
+                                <div class="mt-2">
+                                    <a href="{{ membership.payment_proof.url }}" class="btn btn-sm btn-primary" target="_blank">
+                                        <i class="fas fa-expand"></i> View Full Size
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-warning">
+                            No payment proof uploaded
+                        </div>
+                    {% endif %}
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="notes" class="form-label">Verification Notes</label>
+                            <textarea name="notes" id="notes" class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" name="verification_status" value="verified" class="btn btn-success">
+                                <i class="fas fa-check"></i> Verify Payment
+                            </button>
+                            <button type="submit" name="verification_status" value="rejected" class="btn btn-danger">
+                                <i class="fas fa-times"></i> Reject Payment
+                            </button>
+                            <a href="{% url 'membership_detail' membership.mid %}" class="btn btn-secondary">
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

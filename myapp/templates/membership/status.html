@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Membership Status - ICpEPHUB{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Membership Status</h2>
+    {% if membership %}
+        <p>Status: {{ membership.get_status_display }}</p>
+        <p>Payment Status: {{ membership.get_payment_status_display }}</p>
+        <p>Application Date: {{ membership.created_at|date:"F d, Y" }}</p>
+    {% else %}
+        <p>You do not have any membership applications.</p>
+    {% endif %}
+</div>
+{% endblock %}

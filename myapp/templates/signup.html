@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-Up Form</title>
+    <link rel="stylesheet" href="{% static 'css/access.css' %}">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header Section with Home Link -->
+    <header class="header">
+        <a href="{% url 'home' %}" class="home-link">Home</a>
+    </header>
+    
+    <!-- Sign-Up Form Wrapper -->
+   <div class="wrapper">
+    <form method="post"> <!-- Change action to method="post" for Django form handling -->
+        {% csrf_token %} <!-- Include CSRF token for security -->
+        
+        <h1>Welcome to ICpEPHUB</h1>
+        <p class="subtitle">Create your account</p>
+        
+        <!-- Full Name Input Field -->
+        <div class="input-box">
+            {{ form.first_name.label_tag }} <!-- Label for first name -->
+            {{ form.first_name }} <!-- First name input field -->
+            {{ form.first_name.errors }} <!-- Display errors for first name -->
+        </div>
+        
+        <div class="input-box">
+            {{ form.middle_name.label_tag }} <!-- Label for middle name -->
+            {{ form.middle_name }} <!-- Middle name input field -->
+            {{ form.middle_name.errors }} <!-- Display errors for middle name -->
+        </div>
+        
+        <div class="input-box">
+            {{ form.last_name.label_tag }} <!-- Label for last name -->
+            {{ form.last_name }} <!-- Last name input field -->
+            {{ form.last_name.errors }} <!-- Display errors for last name -->
+        </div>
+        
+        <!-- Email Input Field -->
+        <div class="input-box">
+            {{ form.email.label_tag }} <!-- Label for email -->
+            {{ form.email }} <!-- Email input field -->
+            {{ form.email.errors }} <!-- Display errors for email -->
+        </div>
+        
+        <!-- Student ID Input Field -->
+        <div class="input-box">
+            <label for="{{ form.sid.id_for_label }}">Student ID</label>
+            <div class="input-group">
+                {{ form.sid }} <!-- Student ID input field -->
+                {{ form.sid.errors }} <!-- Display errors for student ID -->
+            </div>
+        </div>
+        
+        <!-- Password Input Field -->
+        <div class="input-box">
+            <label for="{{ form.pwd.id_for_label }}">Password</label>
+            <div class="input-group">
+                {{ form.pwd }} <!-- Password input field -->
+                {{ form.pwd.errors }} <!-- Display errors for password -->
+            </div>
+        </div>
+        
+        <!-- Confirm Password Input Field -->
+        <div class="input-box">
+            <label for="{{ form.pwd2.id_for_label }}">Confirm Password</label>
+            <div class="input-group">
+                {{ form.pwd2 }} <!-- Confirm password input field -->
+                {{ form.pwd2.errors }} <!-- Display errors for confirm password -->
+            </div>
+        </div>
+        
+        <!-- Sign-Up Button -->
+        <button type="submit" class="btn">Sign Up</button>
+        
+        <!-- Link to Login Page -->
+        <div class="auth-link">
+            <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+        </div>
+    </form>
+</div>
+</body>
+</html>

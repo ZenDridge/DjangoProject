@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Admin Dashboard - ICpEPHUB{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- Stats Summary -->
+    <div class="dashboard-card">
+        <h3>Welcome, {{ user.first_name }}!</h3>
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Total Users</h3>
+                    <p>{{ total_users }}</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <i class="fas fa-user-shield"></i>
+                    <h3>Staff Members</h3>
+                    <p>{{ total_staff }}</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stats-card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Total Events</h3>
+                    <p>{{ total_events }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Membership Overview</h5>
+            <a href="{% url 'manage_memberships' %}" class="btn btn-primary btn-sm">Manage Memberships</a>
+        </div>
+        <div class="card-body">
+            <div class="mt-4">
+                <h6>Recent Membership Activity</h6>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for membership in recent_memberships %}
+                            <tr>
+                                <td>{{ membership.user.full_name }}</td>
+                                <td>
+                                    <span class="badge bg-{{ membership.status|yesno:'success,warning' }}">
+                                        {{ membership.get_status_display }}
+                                    </span>
+                                </td>
+                                <td>{{ membership.created_at|date:"M d, Y" }}</td>
+                                <td>
+                                    <a href="{% url 'membership_detail' membership.mid %}" class="btn btn-sm btn-primary">View</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-card mt-4">
+        <h3>Event Management</h3>
+        <div class="d-flex justify-content-between mb-3">
+            <h5 class="mb-0">Upcoming Events</h5>
+            <a href="{% url 'create_event' %}" class="btn btn-primary btn-sm">Create Event</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for event in events %}
+                    <tr>
+                        <td>{{ event.title }}</td>
+                        <td>{{ event.start|date:"M d, Y H:i" }}</td>
+                        <td>{{ event.end|date:"M d, Y H:i" }}</td>
+                        <td>
+                            <a href="{% url 'edit_event' event.eid %}" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="{% url 'delete_event' event.eid %}" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4">No upcoming events.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- User Management -->
+    <div class="dashboard-card mt-4">
+        <h3>User Management</h3>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>FirstName</th>
+                        <th>Middle Name</th>
+                        <th>Last Name</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for member in members %}
+                    <tr>
+                        <td>{{ member.first_name }}</td>
+                        <td>{{ member.middle_name|default:"-" }}</td>
+                        <td>{{ member.last_name }}</td>
+                        <td>
+                            {% if member.admin %}Admin
+                            {% elif member.staff %}Staff
+                            {% else %}User{% endif %}
+                        </td>
+                        <td>{% if member.active %}Active{% else %}Inactive{% endif %}</td>
+                        <td>
+                            {% if not member.admin or user.email != member.email %}
+                            <a href="{% url 'toggle_staff' uid=member.uid %}" class="btn btn-sm btn-primary">
+                                {% if member.staff %}Remove Staff{% else %}Make Staff{% endif %}
+                            </a>
+                            <a href="{% url 'toggle_admin' uid=member.uid %}" class="btn btn-sm btn-warning">
+                                {% if member.admin %}Remove Admin{% else %}Make Admin{% endif %}
+                            </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Apply for Membership - ICpEPHUB{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Membership Application</h2>
+    <p>Please follow the steps below to complete your application:</p>
+
+    <div class="alert alert-info">
+        <strong>Step 1:</strong> Scan the QR code below to make your payment.
+    </div>
+
+    <div class="text-center mb-4">
+        <img src="{% static 'assets/images/qr.jpg' %}" alt="QR Code for Payment" class="img-fluid" style="max-width: 200px;">
+    </div>
+
+    <div class="alert alert-secondary">
+        <strong>Payment Details:</strong>
+        <ul>
+            <li><strong>Account Name:</strong> Angelynnie Tamayo</li>
+            <li><strong>Account Number:</strong> 0949-542-5105</li>
+            <li><strong>Reference Code:</strong> Use your email as the reference.</li>
+        </ul>
+    </div>
+
+    <div class="alert alert-info">
+        <strong>Step 2:</strong> Upload your payment proof below.
+    </div>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset>
+            <legend>Upload Payment Proof</legend>
+            {{ form.as_p }}
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Submit Application</button>
+    </form>
+</div>
+{% endblock %}
