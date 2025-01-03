@@ -30,7 +30,8 @@ ALLOWED_HOSTS = [
     'icpephub-c1nwwcerk-amiels-projects-c48b5a46.vercel.app',
     'icpephub-qaa4r1kfm-amiels-projects-c48b5a46.vercel.app',
     'icpephub.vercel.app',
-    '.vercel.app'
+    '.vercel.app',
+    '.onrender.com'
 ]
 
 # Application definition
