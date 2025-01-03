@@ -1,0 +1,20 @@
+/* Carousel Section */
+.carousel-item {
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.carousel-caption h5 {
+    font-size: 2rem;
+}
+
+.carousel-item img {
+    max-width: 100%;
+    max-height: 500px; /* Limit the image height */
+    object-fit: cover;
+}
