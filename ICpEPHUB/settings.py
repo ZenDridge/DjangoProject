@@ -24,7 +24,12 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'BinangkalRecipeForDisaster')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['vercel.app']
+ALLOWED_HOSTS = [
+    'localhost', 
+    '127.0.0.1', 
+    'icpephub-c1nwwcerk-amiels-projects-c48b5a46.vercel.app', 
+    '.vercel.app'
+]
 
 # Application definition
 INSTALLED_APPS = [
