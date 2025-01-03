@@ -28,6 +28,7 @@ ALLOWED_HOSTS = [
     'localhost', 
     '127.0.0.1', 
     'icpephub-c1nwwcerk-amiels-projects-c48b5a46.vercel.app',
+    'icpephub-qaa4r1kfm-amiels-projects-c48b5a46.vercel.app',
     'icpephub.vercel.app',
     '.vercel.app'
 ]
