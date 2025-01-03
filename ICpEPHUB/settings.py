@@ -31,7 +31,6 @@ ALLOWED_HOSTS = [
     'icpephub-qaa4r1kfm-amiels-projects-c48b5a46.vercel.app',
     'icpephub.vercel.app',
     '.vercel.app',
-    '.onrender.com'
 ]
 
 # Application definition
@@ -82,7 +81,7 @@ WSGI_APPLICATION = 'ICpEPHUB.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME', 'icpephubdb'),
+        'NAME': os.getenv('DB_NAME', 'postgres'),
         'USER': os.getenv('DB_USER', 'postgres.mljsnqwcbdunemonnwif'),
         'PASSWORD': os.getenv('DB_PASSWORD', 'ineedtorestsupabase'),
         'HOST': os.getenv('DB_HOST', 'aws-0-ap-southeast-1.pooler.supabase.com'),
