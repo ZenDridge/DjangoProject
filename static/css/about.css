@@ -1,0 +1,136 @@
+/* Modal Background Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000; /* Ensure modal is above other content */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Prevents content overflow when modal is active */
+}
+
+/* Modal Content Styling */
+.modal-content {
+    background: rgb(0, 83, 161);
+    border-radius: 10px;
+    padding: 40px;
+    text-align: justify;
+    width: 70%;
+    max-width: 800px;
+    transform: scale(0.9); /* Initial smaller size for animation */
+    opacity: 0; /* Initially hidden */
+    animation: appear 0.4s ease forwards; /* Default appear animation */
+    color: rgb(255, 255, 255); /* Set text color to white */
+    max-height: 400px; /* Increased max-height for more content */
+    overflow: hidden; /* Hide overflow */
+    overflow-y: auto; /* Allow vertical scrolling */
+    position: relative; /* Ensure close button is positioned relative to this content */
+}
+
+/* Hide Scrollbar but Keep Content Scrollable */
+.modal-content::-webkit-scrollbar {
+    display: none; /* Hide scrollbar in Webkit-based browsers */
+}
+
+.modal-content {
+    -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
+    scrollbar-width: none;     /* Hide scrollbar for Firefox */
+}
+
+/* Keyframes for Appear Animation */
+@keyframes appear {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Keyframes for Close Animation */
+@keyframes close {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+}
+
+/* Modal Visible State */
+.modal-show {
+    display: flex; /* Makes the modal visible */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal Closing State */
+.modal-closing .modal-content {
+    animation: close 0.4s ease forwards; /* Closing animation */
+}
+
+/* Close Button Styling */
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    color: rgb(255, 255, 255); /* Close button color */
+    cursor: pointer;
+    z-index: 1001; /* Ensure the close button appears above modal content */
+    transition: color 0.5s ease;
+}
+
+.modal-close:hover {
+    color: rgba(255, 0, 0, 0.795);
+}
+
+/* Heading Styling in Modal */
+.modal-content h1,
+.modal-content h2,
+.modal-content h3,
+.modal-content h4 {
+    font-size: 2rem; /* Standardize heading font size */
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.modal-content h1 {
+    margin-bottom: 20px;
+}
+
+.modal-content h2,
+.modal-content h3,
+.modal-content h4 {
+    margin-top: 20px;
+}
+
+/* Fade-in Background Animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Modal Fade Effect for Compatibility */
+.modal.fade {
+    display: flex;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.modal.fade.modal-show {
+    opacity: 1;
+}

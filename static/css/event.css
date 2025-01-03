@@ -1,0 +1,127 @@
+/* Events Navigation Section */
+nav .events-nav {
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
+    width: 100%; /* Ensure it spans the full width */
+    text-align: center; /* Centers the text inside the section */
+    padding: 0.6rem; /* Optional padding for spacing */
+}
+
+nav .events-nav h1 {
+    font-size: 1rem; /* Adjust font size as needed */
+    letter-spacing: 2px;
+    color: #ffffff; /* Text color */
+    margin: 0; /* Optional: remove margin for a tighter layout */
+}
+
+/* Events Section */
+.events {
+    text-align: center;
+    padding: 3rem 1rem;
+    height: 87vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Vertically center content */
+    overflow: hidden; /* Ensure no overflow from the events container */
+}
+
+/* Event Section Title */
+.event-section-title {
+    font-size: 2.5rem; /* Slightly larger font for better readability */
+    color: #ffffff; /* Keep the white color for visibility */
+    font-weight: bold; /* Maintain bold for emphasis */
+    letter-spacing: 2px; /* Keep the letter spacing for style */
+    text-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5); /* Add a shadow for better contrast on varying backgrounds */
+    padding: 10px 20px; /* Add padding to make the text less cramped */
+}
+
+
+/* Event Cards */
+.event-cards {
+    display: flex;
+    justify-content: center; /* Center the cards horizontally */
+    align-items: center; /* Align items in the center vertically if needed */
+    gap: 9rem; /* Add space between the cards */
+    width: 100%;
+    overflow-x: auto; /* Allow horizontal scrolling if there are many cards */
+    padding-top: 4rem; /* Ensure minimal padding at the top */
+}
+
+/* Event Card */
+.event-card {
+    background-color: #355177;
+    border: 1px solid #ffffff;
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+    width: 100%;
+    max-width: 350px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.5s ease, box-shadow 0.5s ease, all 0.5s ease; /* Smooth transition for scaling and shadow */
+    cursor: pointer;
+}
+
+/* Pop out effect on hover */
+.event-card:hover {
+    transform: translateY(-50px); /* Lift the card higher */
+    box-shadow: 0 10px 100px rgba(0, 0, 0, 0.4);
+}
+
+/* Event Card Image */
+.event-card img {
+    width: 100%;
+    height: 350px;
+    object-fit: auto;
+    border-radius: 10px;
+}
+
+/* Event Card Title */
+.event-card h3 {
+    font-size: 1.25rem;
+    color: #ffffff;
+    margin: 1rem 0;
+    font-weight: bold;
+}
+
+/* Event Card Description */
+.event-card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+}
+
+/* Open State: When clicked, card hover effect is disabled */
+.event-card.open {
+    transform: translateY(0) !important; /* Override hover effect when clicked */
+    transition: transform 0.5s ease, box-shadow 0.5s ease, all 0.5s ease; /* Smooth transition for opening and closing */
+}
+
+/* Event Details (Clickable Link) */
+.event-details {
+    display: block; /* Always display the details */
+    margin-top: 1rem;
+    text-align: center; /* Center the clickable text */
+}
+
+/* Event Card Open State: Show event details */
+.event-card.open .event-details {
+    display: block; /* Show the link when the card is open */
+}
+
+/* Link Styling */
+.event-details a {
+    color: #ffffff; /* Facebook-like blue color for the link */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold;
+    font-size: 1rem;
+    transition: color 0.5s ease;
+}
+
+/* Link Hover Effect */
+.event-details a:hover {
+    color: #0078c7; /* Darker blue on hover */
+    text-decoration: none; /* Underline the link on hover */
+}

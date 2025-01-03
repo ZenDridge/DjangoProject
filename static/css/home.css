@@ -1,0 +1,276 @@
+/* Import DM Sans font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+
+/* Apply DM Sans globally */
+body {
+    font-family: 'DM Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('../assets/images/bg.jpg') center/cover no-repeat;
+}
+
+/* Navigation Bar */
+nav {
+    position: sticky; /* Keeps the navigation bar fixed to the top */
+    top: 0; /* Ensures it stays at the very top of the viewport */
+    width: 100%; /* Makes the navigation bar span the full width */
+    background-color: #042c4e; /* Background color */
+    color: rgb(255, 255, 255); /* Text color */
+    display: flex; /* Flexbox for layout */
+    padding: 8px 20px; /* Add some padding for spacing */
+    z-index: 1000; /* Ensures the nav bar stays on top of other elements */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3), 0px 2px 6px rgba(0, 0, 0, 0.1); /* Adds a deeper shadow for 3D effect */
+    transition: box-shadow 0.5s ease, transform 0.5s ease; /* Smooth transitions */
+}
+
+/* Left section */
+nav .left {
+    font-size: 1.5rem;
+    color: #ffffff;
+    font-weight: bold;
+    display: flex; /* Align logo and text horizontally */
+    gap: 10px; /* Adds space between the logo and the text */
+    align-items: center; /* Vertically center the logo and text */
+}
+
+nav .left .logo {
+    width: 40px; /* Adjust width as needed */
+    height: 40px; /* Set height equal to width to maintain a square aspect ratio */
+    border-radius: 50%; /* Makes the logo circular */
+    object-fit: cover; /* Ensures the logo is contained properly within the circle */
+    border: 1px solid #000000; /* Add a border (adjust color and width as needed) */
+}
+
+/* Center section */
+nav .center {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    justify-content: center; /* Ensure buttons are centered in the middle */
+    position: absolute; /* Make the center position absolute to allow centering */
+    left: 50%; /* Position it in the middle of the screen */
+    transform: translateX(-52%); /* Adjust the positioning to truly center it */
+}
+
+/* Right section */
+nav .right {
+    display: flex;
+    justify-content: flex-end; /* Aligns content to the right */
+    flex-grow: 1; /* Ensures this section takes up the remaining space */
+}
+
+nav .right .start-button {
+    padding: 8px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #355177;
+    color: rgb(255, 255, 255);
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center; /* Corrected from 'right' to 'center' */
+    transition: background-color 0.5s ease, color 0.5s ease, transform 0.5s ease;
+    text-decoration: none; /* Ensures the link does not have underline */
+    border-radius: 8px; /* Optional: Adds rounded corners */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.08); /* Adds shadow for depth */
+    margin-right: 0.5in;
+}
+
+/* Hover effect: Lifts the button */
+nav .right .start-button:hover {
+    background-color: #5f79a2; /* Darker shade for hover */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2), 0px 4px 8px rgba(0, 0, 0, 0.1); /* Deeper shadow on hover */
+    transform: scale(1.1); /* Slightly enlarge the button on hover */
+}
+
+/* Contact Button */
+.contact-button {
+    position: relative; /* Ensure the button serves as a positioning context for icons */
+    display: inline-flex;
+    align-items: center;
+    gap: 10px; /* Space between text and icons */
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff; /* Text color */
+    text-decoration: none; /* Remove underline */
+    cursor: pointer; /* Make the text clickable */
+    transition: color 0.5s ease, transform 0.5s ease; /* Smooth color and transform transition */
+    display: flex; /* Use flexbox for alignment */
+    justify-content: center; /* Center text horizontally */
+    align-items: center; /* Center text vertically */
+    text-align: center; /* Ensure the text inside is centered */
+}
+
+/* Contact Icons */
+.contact-button .icons {
+    position: absolute;
+    top: calc(100% + 10px); /* Position icons below the button with spacing */
+    left: -40%; /* Center the icons horizontally */
+    opacity: 0; /* Initially invisible */
+    display: flex;
+    flex-direction: row; /* Align icons horizontally */
+    gap: 10px; /* Space between icons */
+    z-index: 3;
+    pointer-events: none; /* Prevent interaction when hidden */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth fade-in/out and transform */
+}
+
+/* Hover effect */
+.contact-button:hover {
+    color: #6cb1ff; /* Change text color on hover */
+    transform: scale(1.1); /* Slightly enlarge the button on hover */
+}
+
+/* Make icons visible when the button is clicked */
+.contact-button.active .icons {
+    opacity: 1; /* Fully visible */
+    pointer-events: auto; /* Enable interaction */
+    transform: translateY(0); /* Ensure the icons are in their final position */
+}
+
+/* Each icon (Image) */
+.contact-button .icon {
+    width: 50px; /* Set a fixed width for the images */
+    height: 50px; /* Set a fixed height for the images */
+    object-fit: cover; /* Ensure the images fit nicely within the container */
+    transition: transform 0.5s ease, opacity 0.5s ease; /* Smooth transformation on hover */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+/* Hover effect */
+.contact-button .icon:hover {
+    transform: scale(1.2); /* Enlarge the icon on hover */
+    opacity: 0.8; /* Slightly reduce opacity on hover */
+}
+
+/* Fade-in animation for icons from top to bottom */
+.contact-button.active .icon {
+    animation: fadeInDown 0.5s ease forwards; /* Animation for smooth entry from the top */
+}
+
+/* Fade-in animation from top to bottom */
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(0); /* Start above the final position */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* End in position */
+    }
+}
+
+/* About Us Text Link */
+.about-button {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff; /* Text color */
+    cursor: pointer; /* Makes the text clickable */
+    align-items: center;
+    transition: color 0.5s ease, transform 0.5s ease; /* Smooth color and transform transition */
+    padding: 12px 20px;
+    display: flex; /* Use flexbox for alignment */
+    justify-content: center; /* Center text horizontally */
+    align-items: center; /* Center text vertically */
+    text-align: center; /* Ensure the text inside is centered */
+}
+
+/* Hover effect */
+.about-button:hover {
+    color: #6cb1ff; /* Change text color on hover */
+    transform: scale(1.1); /* Slightly enlarge the button on hover */
+}
+
+/* Frontline Section */
+.frontline {
+    text-align: center;
+    color: rgb(255, 255, 255);
+    background: url('../assets/images/gov.jpg') no-repeat right bottom; /* Position image at the lower right */
+    background-size: 35% 85%; /* Ensure the image maintains its aspect ratio */
+    background-blend-mode: overlay; /* Optional, depending on your design */
+    height: 95vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+    justify-content: top center; /* Vertically center content */
+    align-items: flex-start; /* Align content to the left */
+    padding: 2rem; /* Add padding for spacing */
+    width: 100%; /* Ensure it stretches across the entire screen */
+}
+
+/* Heading */
+.frontline h1 {
+    font-size: 3.5rem;
+    font-weight: bold; /* Maintain bold for emphasis */
+    color: #ffffff;
+    text-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5); /* Add a shadow for better contrast on varying backgrounds */
+    margin-top: 2.5in; /* Add space above the heading*/
+    transform: translateX(0.7in); /* Slightly move the content to the left */
+}
+
+/* Heading */
+.frontline h2 {
+    font-size: 2rem;
+    font-weight: bold; /* Maintain bold for emphasis */
+    color: #ffffff;
+    text-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5); /* Add a shadow for better contrast on varying backgrounds */
+    text-align: center; /* Center the text within each paragraph */
+    margin: 0 auto; /* Center the block within its container */
+    margin-top: -30px;
+    transform: translateX(-2.2in); /* Slightly move the content to the left */
+}
+
+/* Paragraph */
+.frontline p {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a shadow for better contrast on varying backgrounds */
+    text-align: center; /* Center the text within each paragraph */
+    margin: 0 auto; /* Center the block within its container */
+    margin-top: 0.5in;
+    transform: translateX(-2.2in); /* Slightly move the content to the left */
+}
+
+/* Join Button */
+.btn-join {
+    display: inline-block; /* Make the button inline-block for better alignment */
+    font-size: 1rem;
+    color: #ffffff;
+    margin: 0 auto; /* Center the block within its container */
+    margin-top: 10px;
+    transform: translateX(-2.2in); /* Slightly move the content to the left */
+    background-color: #355177;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold; /* Make the text bold for emphasis */
+    margin-top: 1rem; /* Add spacing above the button */
+    transition: background-color 0.5s ease, transform 0.5s ease;
+}
+
+/* Button Hover Effect */
+.btn-join:hover {
+    background-color: #5f79a2; /* Darker shade for hover */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2), 0px 4px 8px rgba(0, 0, 0, 0.1); /* Deeper shadow on hover */
+}
+
+
+/* Footer */
+footer.footer {
+    background-color: #042c4e; /* Same background color as the navigation bar */
+    padding: 1rem 0; /* Consistent vertical padding */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add subtle shadow */
+    display: flex; /* Use flexbox for alignment */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    text-align: center; /* Ensure text alignment is centered */
+}
+
+/* Footer Text */
+footer.footer span {
+    color: #ffffff; /* White text to match the navigation bar */
+    font-size: 1rem; /* Adjust font size for readability */
+    font-weight: 500; /* Slightly bold text */
+    letter-spacing: 1px; /* Add spacing for a clean look */
+}
+
