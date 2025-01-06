@@ -3,10 +3,6 @@
 
 {% block title %}Admin Dashboard - ICpEPHUB{% endblock %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
-{% endblock %}
-
 {% block content %}
 <div class="dashboard-container">
     <!-- Stats Summary -->
@@ -121,7 +117,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>FirstName</th>
+                        <th>First Name</th>
                         <th>Middle Name</th>
                         <th>Last Name</th>
                         <th>Role</th>
@@ -138,7 +134,7 @@
                         <td>
                             {% if member.admin %}Admin
                             {% elif member.staff %}Staff
-                            {% else %}User{% endif %}
+                            {% else %}User {% endif %}
                         </td>
                         <td>{% if member.active %}Active{% else %}Inactive{% endif %}</td>
                         <td>
