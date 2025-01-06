@@ -88,8 +88,6 @@ class EventForm(forms.ModelForm):
         }
 
 class AccountEditForm(forms.ModelForm):
-    theme = forms.ChoiceField(choices=[('light', 'Light'), ('dark', 'Dark')], required=False)
-
     class Meta:
         model = User
         fields = ('first_name', 'middle_name', 'last_name', 'email', 'sid', 'theme')
