@@ -1,4 +1,5 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+
 {% load static %}
 
 {% block title %}Initial Setup - ICpEPHUB{% endblock %}
@@ -8,29 +9,26 @@
 {% endblock %}
 
 {% block content %}
-<div class="auth-container">
-    <div class="auth-card">
-        <div class="auth-header">
-            <h1>Create Admin Account</h1>
-            <p>Set up your initial administrator account</p>
-        </div>
+<div class="wrapper">
+    <form method="post">
+        {% csrf_token %}
         
-        <form method="post">
-            {% csrf_token %}
-            {% for field in form %}
-            <div class="input-box"> 
-                {{ field.label_tag }} 
-                {{ field }} 
-                {% if field.errors %}
-                <div class="invalid-feedback d-block">
-                    {{ field.errors.0 }} 
-                </div>
-                {% endif %}
+        <h1>Create Admin Account</h1>
+        <p class="subtitle">Set up your initial administrator account</p>
+        
+        {% for field in form %}
+        <div class="input-box">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.errors %}
+            <div class="invalid-feedback d-block">
+                {{ field.errors.0 }}
             </div>
-            {% endfor %}
-            
-            <button type="submit" class="btn">Create Admin Account</button> 
-        </form>
-    </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+        
+        <button type="submit" class="btn">Create Admin Account</button>
+    </form>
 </div>
 {% endblock %}
