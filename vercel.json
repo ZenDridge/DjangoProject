@@ -5,7 +5,7 @@
             "use": "@vercel/python",
             "config": { 
                 "maxLambdaSize": "150mb", 
-                "runtime": "python3.9",
+                "runtime": "python3.12",
                 "buildCommand": "bash setup.sh" 
             }
         }
