@@ -20,6 +20,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     staff = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)
     joined = models.DateTimeField(default=timezone.now)
+    theme = models.CharField(max_length=20, default='light')
 
     objects = UserMgr()
     USERNAME_FIELD = 'email'
