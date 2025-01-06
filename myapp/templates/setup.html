@@ -4,7 +4,7 @@
 {% block title %}Initial Setup - ICpEPHUB{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+<link rel="stylesheet" href="{% static 'css/access.css' %}"> 
 {% endblock %}
 
 {% block content %}
@@ -18,20 +18,18 @@
         <form method="post">
             {% csrf_token %}
             {% for field in form %}
-            <div class="form-group">
-                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                <div class="input-group">
-                    {{ field }}
-                    {% if field.errors %}
-                    <div class="invalid-feedback d-block">
-                        {{ field.errors.0 }}
-                    </div>
-                    {% endif %}
+            <div class="input-box"> 
+                {{ field.label_tag }} 
+                {{ field }} 
+                {% if field.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ field.errors.0 }} 
                 </div>
+                {% endif %}
             </div>
             {% endfor %}
             
-            <button type="submit" class="auth-button">Create Admin Account</button>
+            <button type="submit" class="btn">Create Admin Account</button> 
         </form>
     </div>
 </div>
