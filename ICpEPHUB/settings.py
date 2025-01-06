@@ -14,21 +14,20 @@ from pathlib import Path
 import os  # Import os for environment variables
 from django.conf import settings
 from django.conf.urls.static import static
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'BinangkalRecipeForDisaster')
+SECRET_KEY = 'SECRET_KEY'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost', 
-    '127.0.0.1', 
-    'icpephub-c1nwwcerk-amiels-projects-c48b5a46.vercel.app',
-    'icpephub-qaa4r1kfm-amiels-projects-c48b5a46.vercel.app',
+    '127.0.0.1',
     'icpephub.vercel.app',
     '.vercel.app',
 ]
@@ -41,8 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'myapp',
     'django_crontab',
+    'myapp',
 ]
 
 MIDDLEWARE = [
@@ -81,13 +80,13 @@ WSGI_APPLICATION = 'ICpEPHUB.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME', 'postgres'),  # Default value if not set
-        'USER': os.getenv('DB_USER', 'postgres.mljsnqwcbdunemonnwif'),
-        'PASSWORD': os.getenv('DB_PASSWORD', 'ineedtorestsupabase'),
-        'HOST': os.getenv('DB_HOST', 'aws-0-ap-southeast-1.pooler.supabase.com'),
-        'PORT': os.getenv('DB_PORT', '6543'),
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
         'OPTIONS': {
-            'sslmode': 'require',  # Enforce SSL connection to the database
+            'sslmode': 'require',
         },
     }
 }

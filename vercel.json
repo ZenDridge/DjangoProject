@@ -3,20 +3,20 @@
         {
             "src": "ICpEPHUB/wsgi.py",
             "use": "@vercel/python",
-            "config": { "maxLambdaSize": "150mb", "runtime": "python3.9" }
+            "config": { 
+                "maxLambdaSize": "150mb", 
+                "runtime": "python3.9",
+                "buildCommand": "bash setup.sh" 
+            }
         }
     ],
     "routes": [
         {
-            "src": "/static/(.*)",
-            "dest": "staticfiles/$1"
+            "src": "/(.*)",
+            "dest": "ICpEPHUB/wsgi.py"
         },
         {   "src": "/static/(.*)",
             "dest": "/static/$1" 
-        },
-        {
-            "src": "/(.*)",
-            "dest": "ICpEPHUB/wsgi.py"
         }
     ]
 }
