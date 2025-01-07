@@ -16,6 +16,8 @@ from .models import User, Event, Membership
 from .forms import UserForm, EventForm, AccountEditForm, MembershipApplicationForm
 from .permissions import adm_req, stf_req
 
+supabase: Client = create_client(settings.SUPABASE_URL, settings.SUPABASE_KEY)
+
 def home(request):
     if request.user.is_authenticated:
         if request.user.admin:
@@ -188,15 +190,22 @@ def apply_membership(request):
             membership.user = request.user
             membership.status = 'pending'
             membership.payment_status = 'pending'
-            
-            fs = FileSystemStorage(location=tempfile.gettempdir())
-            payment_proof = request.FILES['payment_proof']
-            filename = fs.save(payment_proof.name, payment_proof)
-            membership.payment_proof = filename
 
-            membership.save()
-            messages.success(request, 'Your membership application has been submitted.')
-            return redirect('membership_status')
+            # Upload the payment proof to Supabase Storage
+            payment_proof = request.FILES['payment_proof']
+            file_name = f'payment_proofs/{request.user.id}/{payment_proof.name}'  # Create a unique file path
+            
+            # Upload the file
+            response = supabase.storage.from_('your-bucket-name').upload(file_name, payment_proof)
+
+            if response.status_code == 200:
+                membership.payment_proof = file_name  # Store the file path in the database
+                membership.save()
+                messages.success(request, 'Your membership application has been submitted.')
+                return redirect('membership_status')
+            else:
+                messages.error(request, 'Failed to upload payment proof. Please try again.')
+
     else:
         form = MembershipApplicationForm()
     
