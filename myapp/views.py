@@ -19,8 +19,6 @@ from .forms import UserForm, EventForm, AccountEditForm, MembershipApplicationFo
 from .permissions import adm_req, stf_req
 from supabase import create_client, Client
 
-SUPABASE_URL = 'https://mljsnqwcbdunemonnwif.supabase.co'
-SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1sanNucXdjYmR1bmVtb25ud2lmIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczNTg4MDU5OCwiZXhwIjoyMDUxNDU2NTk4fQ.WCPSuoapf212OzEk64NDm15pqDJ_H-W_T4e9mY1tz_8'
 supabase: Client = create_client(settings.SUPABASE_URL, settings.SUPABASE_KEY)
 
 def home(request):
@@ -215,11 +213,18 @@ def apply_membership(request):
             # Upload the file to Supabase
             response = supabase.storage.from_(bucket_name).upload(unique_file_name, file_content)
 
-            full_url = f"https://mljsnqwcbdunemonnwif.supabase.co/storage/v1/object/public/paymentproofs/{unique_file_name}"
-            membership.payment_proof = full_url  # Store the full URL in the database
-            membership.save()  # Save the updated membership instance
-            messages.success(request, 'Your membership application has been submitted.')
-            return redirect('membership_status')
+            # Check the response
+            if response and response.get('data'):  # Check if response contains data
+                # Construct the full URL for the uploaded file
+                full_url = f"{SUPABASE_URL}/storage/v1/object/public/{bucket_name}/{unique_file_name}"
+                membership.payment_proof = full_url  # Store the full URL in the database
+                membership.save()  # Save the updated membership instance
+                messages.success(request, 'Your membership application has been submitted.')
+                return redirect('membership_status')
+            else:
+                # Handle the case where the upload failed
+                error_message = response.get('error', {}).get('message', 'Unknown error')  # Extract error message
+                messages.error(request, f'Failed to upload payment proof: {error_message}')
         else:
             # Print form errors for debugging
             print(form.errors)
