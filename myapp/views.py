@@ -193,11 +193,11 @@ def apply_membership(request):
             membership.status = 'pending'
             membership.payment_status = 'pending'
 
-            # Upload the payment proof to Supabase Storage
+            # Use uid instead of id
             payment_proof = request.FILES['payment_proof']
             file_name = f'payment_proofs/{request.user.uid}/{payment_proof.name}'  # Create a unique file path
             
-            # Upload the file
+            # Upload the file directly
             response = supabase.storage.from_('your-bucket-name').upload(file_name, payment_proof)
 
             if response.status_code == 200:
