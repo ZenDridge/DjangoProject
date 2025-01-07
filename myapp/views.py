@@ -196,7 +196,6 @@ def apply_membership(request):
             membership.user = request.user
             membership.status = 'pending'
             membership.payment_status = 'pending'
-            membership.save()  # Save the membership instance to the database
 
             # Handle the payment proof file
             payment_proof = request.FILES['payment_proof']
