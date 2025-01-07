@@ -5,8 +5,8 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h2>Membership Application</h2>
-    <p>Please follow the steps below to complete your application:</p>
+    <h2 class="text-center mb-4">Membership Application</h2>
+    <p class="text-center mb-4">Please follow the steps below to complete your application:</p>
 
     <div class="alert alert-info">
         <strong>Step 1:</strong> Scan the QR code below to make your payment.
@@ -29,13 +29,15 @@
         <strong>Step 2:</strong> Upload your payment proof below.
     </div>
 
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" class="mb-4">
         {% csrf_token %}
-        <fieldset>
-            <legend>Upload Payment Proof</legend>
+        <fieldset class="border p-3 rounded">
+            <legend class="w-auto px-2">Upload Payment Proof</legend>
             {{ form.as_p }}
         </fieldset>
-        <button type="submit" class="btn btn-primary">Submit Application</button>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary mt-3">Submit Application</button>
+        </div>
     </form>
 </div>
 {% endblock %}
