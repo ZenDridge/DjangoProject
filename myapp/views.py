@@ -188,6 +188,12 @@ def apply_membership(request):
             membership.user = request.user
             membership.status = 'pending'
             membership.payment_status = 'pending'
+            
+            fs = FileSystemStorage(location=tempfile.gettempdir())
+            payment_proof = request.FILES['payment_proof']
+            filename = fs.save(payment_proof.name, payment_proof)
+            membership.payment_proof = filename
+
             membership.save()
             messages.success(request, 'Your membership application has been submitted.')
             return redirect('membership_status')
