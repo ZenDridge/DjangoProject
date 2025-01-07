@@ -200,7 +200,7 @@ def apply_membership(request):
             
             # Read the file content and upload it
             file_content = payment_proof.read()  # Read the content of the InMemoryUploadedFile
-            response = supabase.storage.from_('bucket_name').upload(file_name, file_content)
+            response = supabase.storage.from_(bucket_name).upload(file_name, file_content)
 
             if response.status_code == 200:
                 membership.payment_proof = file_name  # Store the file path in the database
