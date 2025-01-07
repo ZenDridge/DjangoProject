@@ -202,7 +202,7 @@ def apply_membership(request):
             
             # Read the file content and upload it
             file_content = payment_proof.read()  # Read the content of the InMemoryUploadedFile
-            response = supabase.storage.from_('bucket_name').upload(unique_file_name, file_content)
+            response = supabase.storage.from_(bucket_name).upload(unique_file_name, file_content)
 
             # Check the response
             if response.data:  # Check if the upload was successful
