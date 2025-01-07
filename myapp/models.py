@@ -95,7 +95,7 @@ class Membership(models.Model):
     end_date = models.DateField(null=True, blank=True)
     status = models.CharField(max_length=20, choices=MEMBERSHIP_STATUS, default='pending')
     payment_status = models.CharField(max_length=20, choices=PAYMENT_STATUS, default='unpaid')
-    payment_proof = models.ImageField(upload_to='payment_proofs/', null=True, blank=True)
+    payment_proof = models.CharField(max_length=255, null=True, blank=True)
     payment_name = models.CharField(max_length=100, null=True, blank=True)
     payment_phone = models.CharField(max_length=15, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
