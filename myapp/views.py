@@ -212,7 +212,7 @@ def apply_membership(request):
                 membership.payment_proof = unique_file_name  # Store the file path in the database
                 membership.save()  # Save the updated membership instance
                 messages.success(request, 'Your membership application has been submitted.')
-                return redirect('membership_status')
+                return redirect('membership _status')
             else:
                 # Handle the case where the upload failed
                 messages.error(request, f'Failed to upload payment proof: {response.message if hasattr(response, "message") else "Unknown error"}')
