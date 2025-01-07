@@ -26,78 +26,7 @@
         </div>
     </div>
     
-    <div class="card mb-4">
-        <div class="card-header">
-            <h5 class="mb-0">Membership Status</h5>
-        </div>
-        <div class="card-body">
-            {% if membership %}
-                {% if membership.status == 'active' %}
-                    <div class="alert alert-success">
-                        <h6>Active Member</h6>
-                        <p>Valid until: {{ membership.end_date|date:"F d, Y" }}</p>
-                        <p>Days remaining: {{ days_remaining }}</p>
-                    </div>
-                {% elif membership.status == 'pending' %}
-                    <div class="alert alert-warning">
-                        <h6>Pending Application</h6>
-                        <p>Submitted on: {{ membership.created_at|date:"F d, Y" }}</p>
-                    </div>
-                {% endif %}
-            {% else %}
-                <div class="alert alert-info">
-                    <h6>No Active Membership</h6>
-                    <p>Apply for membership to access exclusive features!</p>
-                    <a href="{% url 'apply_membership' %}" class="btn btn-primary">Apply Now</a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-
-    
-<div class="dashboard-card mt-4">
-    <h3>My Events & Participation</h3>
-    <div class="event-list">
-        <h5>My Events</h5>
-        {% for event in user_events %}
-        <div class="event-item">
-            <h4>{{ event.title }}</h4>
-            <p><i class="far fa-calendar-alt"></i> {{ event.start|date:"F d, Y" }}</p>
-            <p>{{ event.description }}</p>
-            <div class="event-status">
-                <span class="badge {% if event.status == 'completed' %}bg-success{% else %}bg-primary{% endif %}">
-                    {{ event.status|title }}
-                </span>
-            </div>
-        </div>
-        {% empty %}
-        <p class="text-center text-muted">You haven't registered for any events yet.</p>
-        {% endfor %}
-
-        <h5 class="mt-4">Events You Participated In or Viewed</h5>
-        {% for event in participated_events %}
-        <div class="event-item">
-            <h4>{{ event.title }}</h4>
-            <p><i class="far fa-calendar-alt"></i> {{ event.start|date:"F d, Y" }}</p>
-            <p>{{ event.description }}</p>
-            <p><strong>Role:</strong> 
-                {% if event.participants|length > 0 %}
-                    Participant
-                {% else %}
-                    Viewer
-                {% endif %}
-            </p>
-            <div class="event-status">
-                <span class="badge {% if event.status == 'completed' %}bg-success{% else %}bg-primary{% endif %}">
-                    {{ event.status|title }}
-                </span>
-            </div>
-        </div>
-        {% empty %}
-        <p class="text-center text-muted">You haven't participated in or viewed any events yet.</p>
-        {% endfor %}
-    </div>
-
+<div class="card mb-4">
     <div class="d-flex justify-content-between mb-3 mt-4">
         <h5 class="mb-0">Upcoming Events</h5>
     </div>
