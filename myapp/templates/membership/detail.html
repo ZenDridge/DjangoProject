@@ -47,9 +47,9 @@
                         <p><strong>Phone Number Used for Payment:</strong> {{ membership.payment_phone }}</p>
                         {% if membership.payment_proof %}
                             <div class="text-center">
-                                <img src="{{ membership.payment_proof.url }}" alt="Payment Proof" class="img-fluid mb-3" style="max-height: 400px;">
+                                <img src="https://your_supabase_url/storage/v1/object/public/{{ membership.payment_proof }}" alt="Payment Proof" class="img-fluid mb-3" style="max-height: 400px;">
                                 <div class="mt-2">
-                                    <a href="{{ membership.payment_proof.url }}" class="btn btn-primary" target="_blank">
+                                    <a href="https://your_supabase_url/storage/v1/object/public/{{ membership.payment_proof }}" class="btn btn-primary" target="_blank">
                                         <i class="fas fa-expand"></i> View Full Size
                                     </a>
                                 </div>
