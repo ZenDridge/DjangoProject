@@ -243,6 +243,11 @@ def manage_memberships(request):
 def membership_detail(request, mid):
     membership = get_object_or_404(Membership, mid=mid)
     
+    # Check if the user is staff or admin
+    if not request.user.is_staff and not request.user.is_admin:
+        messages.error(request, 'You do not have permission to manage memberships.')
+        return redirect('manage_memberships')
+
     if request.method == 'POST':
         action = request.POST.get('action')
         if action in ['approve', 'reject']:
