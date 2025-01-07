@@ -205,7 +205,7 @@ def apply_membership(request):
             sanitized_name = ''.join(c for c in payment_proof.name if c.isalnum() or c in ['.', '_', '-']).strip()
             
             # Generate a unique file name using UUID
-            unique_file_name = f'payment_proofs/{request.user.id}/{uuid.uuid4()}_{sanitized_name}'
+            unique_file_name = f'payment_proofs/{request.user.uid}/{uuid.uuid4()}_{sanitized_name}'
             
             # Read the file content
             file_content = payment_proof.read()  # Read the content of the InMemoryUploadedFile
