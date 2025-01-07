@@ -219,6 +219,8 @@ def apply_membership(request):
                 # Handle the case where the upload failed
                 error_message = response.message if hasattr(response, 'message') else 'Unknown error'
                 messages.error(request, f'Failed to upload payment proof: {error_message}')
+                
+            membership.save()
         else:
             # Print form errors for debugging
             print(form.errors)
