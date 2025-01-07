@@ -15,6 +15,7 @@ import os
 from .models import User, Event, Membership
 from .forms import UserForm, EventForm, AccountEditForm, MembershipApplicationForm
 from .permissions import adm_req, stf_req
+from supabase import create_client, Client
 
 supabase: Client = create_client(settings.SUPABASE_URL, settings.SUPABASE_KEY)
 
