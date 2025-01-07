@@ -158,6 +158,7 @@ def usr_view(request):
         'user': user,
         'user_events': Event.objects.filter(owner=user),
         'total_events': Event.objects.count(),
+        'events': Event.objects.order_by('start')[:5], 
         'events_attended': Event.objects.filter(
             owner=user,
             end__lt=current_date
