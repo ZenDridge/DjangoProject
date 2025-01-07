@@ -120,6 +120,9 @@ class AccountEditForm(forms.ModelForm):
             raise ValidationError('ID must be in ##-UR-#### format')
         return sid
 
+from django import forms
+from .models import Membership
+
 class MembershipApplicationForm(forms.ModelForm):
     class Meta:
         model = Membership
@@ -132,6 +135,8 @@ class MembershipApplicationForm(forms.ModelForm):
 
     def clean_payment_phone(self):
         phone = self.cleaned_data.get('payment_phone')
-        if not phone.isdigit() or len(phone) == 9 :
-            raise forms.ValidationError("Enter a valid phone number.")
+        if not phone.isdigit():
+            raise forms.ValidationError("Enter a valid phone number consisting of digits only.")
+        if len(phone) < 10:  # Adjust this based on your requirements
+            raise forms.ValidationError("Phone number must be at least 10 digits long.")
         return phone
