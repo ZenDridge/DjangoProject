@@ -202,13 +202,14 @@ def apply_membership(request):
             file_content = payment_proof.read()  # Read the content of the InMemoryUploadedFile
             response = supabase.storage.from_(bucket_name).upload(file_name, file_content)
 
-            if response.status_code == 200:
+            # Check the response
+            if response.data:  # Check if the upload was successful
                 membership.payment_proof = file_name  # Store the file path in the database
                 membership.save()
                 messages.success(request, 'Your membership application has been submitted.')
                 return redirect('membership_status')
             else:
-                messages.error(request, 'Failed to upload payment proof. Please try again.')
+                messages.error(request, f'Failed to upload payment proof: {response.error}')
 
     else:
         form = MembershipApplicationForm()
