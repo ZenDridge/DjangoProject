@@ -12,6 +12,7 @@ from django.core.mail import send_mail
 from datetime import timedelta
 import json
 import os
+import uuid
 
 from .models import User, Event, Membership
 from .forms import UserForm, EventForm, AccountEditForm, MembershipApplicationForm
@@ -196,15 +197,16 @@ def apply_membership(request):
 
             # Use uid instead of id
             payment_proof = request.FILES['payment_proof']
-            file_name = f'payment_proofs/{request.user.uid}/{payment_proof.name}'  # Create a unique file path
+            # Generate a unique file name using UUID
+            unique_file_name = f'payment_proofs/{request.user.uid}/{uuid.uuid4()}_{payment_proof.name}'  # Create a unique file path
             
             # Read the file content and upload it
             file_content = payment_proof.read()  # Read the content of the InMemoryUploadedFile
-            response = supabase.storage.from_(bucket_name).upload(file_name, file_content)
+            response = supabase.storage.from_('bucket_name').upload(unique_file_name, file_content)
 
             # Check the response
             if response.data:  # Check if the upload was successful
-                membership.payment_proof = file_name  # Store the file path in the database
+                membership.payment_proof = unique_file_name  # Store the file path in the database
                 membership.save()
                 messages.success(request, 'Your membership application has been submitted.')
                 return redirect('membership_status')
