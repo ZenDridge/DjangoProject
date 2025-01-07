@@ -195,6 +195,7 @@ def apply_membership(request):
             membership.user = request.user
             membership.status = 'pending'
             membership.payment_status = 'pending'
+            membership.save()
 
             # Use uid instead of id
             payment_proof = request.FILES['payment_proof']
