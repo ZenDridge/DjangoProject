@@ -200,24 +200,30 @@ def apply_membership(request):
 
             # Handle the payment proof file
             payment_proof = request.FILES['payment_proof']
-            # Generate a unique file name using UUID
-            unique_file_name = f'payment_proofs/{request.user.uid}/{uuid.uuid4()}_{payment_proof.name}'  # Create a unique file path
             
-            # Read the file content and upload it directly to Supabase
+            # Sanitize file name
+            sanitized_name = ''.join(c for c in payment_proof.name if c.isalnum() or c in ['.', '_', '-']).strip()
+            
+            # Generate a unique file name using UUID
+            unique_file_name = f'payment_proofs/{request.user.id}/{uuid.uuid4()}_{sanitized_name}'
+            
+            # Read the file content
             file_content = payment_proof.read()  # Read the content of the InMemoryUploadedFile
+            
+            # Upload the file to Supabase
             response = supabase.storage.from_(bucket_name).upload(unique_file_name, file_content)
 
             # Check the response
-            if response and response.data:  # Check if response has data
+            if response and response.get('data'):  # Check if response contains data
                 # Construct the full URL for the uploaded file
-                full_url = f"https://mljsnqwcbdunemonnwif.supabase.co/storage/v1/object/public/{bucket_name}/{unique_file_name}"
+                full_url = f"{SUPABASE_URL}/storage/v1/object/public/{bucket_name}/{unique_file_name}"
                 membership.payment_proof = full_url  # Store the full URL in the database
                 membership.save()  # Save the updated membership instance
                 messages.success(request, 'Your membership application has been submitted.')
                 return redirect('membership_status')
             else:
                 # Handle the case where the upload failed
-                error_message = response.message if hasattr(response, 'message') else 'Unknown error'
+                error_message = response.get('error', {}).get('message', 'Unknown error')  # Extract error message
                 messages.error(request, f'Failed to upload payment proof: {error_message}')
         else:
             # Print form errors for debugging
