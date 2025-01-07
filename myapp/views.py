@@ -214,7 +214,7 @@ def apply_membership(request):
             response = supabase.storage.from_(bucket_name).upload(unique_file_name, file_content)
 
             # Check the response
-            if response and response.get('data'):  # Check if response contains data
+            if response and response.get():  # Check if response contains data
                 # Construct the full URL for the uploaded file
                 full_url = f"{SUPABASE_URL}/storage/v1/object/public/{bucket_name}/{unique_file_name}"
                 membership.payment_proof = full_url  # Store the full URL in the database
