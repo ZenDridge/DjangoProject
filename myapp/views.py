@@ -214,7 +214,6 @@ def apply_membership(request):
             response = supabase.storage.from_(bucket_name).upload(unique_file_name, file_content)
 
             # Check the response
-            # Check the response
             if response and hasattr(response, 'data'):  # Check if response has data
                 # Construct the full URL for the uploaded file
                 full_url = f"https://mljsnqwcbdunemonnwif.supabase.co/storage/v1/object/public/{bucket_name}/{unique_file_name}"
