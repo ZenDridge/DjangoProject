@@ -208,7 +208,7 @@ def apply_membership(request):
             response = supabase.storage.from_(bucket_name).upload(unique_file_name, file_content)
 
             # Check the response
-            if response and response.get('status') == 200:
+            if response and response.data:  # Check if response has data
                 # Construct the full URL for the uploaded file
                 full_url = f"https://mljsnqwcbdunemonnwif.supabase.co/storage/v1/object/public/{bucket_name}/{unique_file_name}"
                 membership.payment_proof = full_url  # Store the full URL in the database
@@ -217,7 +217,7 @@ def apply_membership(request):
                 return redirect('membership_status')
             else:
                 # Handle the case where the upload failed
-                error_message = response.get('message', 'Unknown error')
+                error_message = response.message if hasattr(response, 'message') else 'Unknown error'
                 messages.error(request, f'Failed to upload payment proof: {error_message}')
         else:
             # Print form errors for debugging
