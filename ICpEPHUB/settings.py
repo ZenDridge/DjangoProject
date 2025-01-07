@@ -143,3 +143,8 @@ CRONJOBS = [
 # Media files (Uploaded files)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# settings.py
+
+SUPABASE_URL = 'postgresql://postgres.mljsnqwcbdunemonnwif:icpephubdbpw@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres'
+SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1sanNucXdjYmR1bmVtb25ud2lmIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczNTg4MDU5OCwiZXhwIjoyMDUxNDU2NTk4fQ.WCPSuoapf212OzEk64NDm15pqDJ_H-W_T4e9mY1tz_8'
