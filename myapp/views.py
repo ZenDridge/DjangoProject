@@ -209,7 +209,9 @@ def apply_membership(request):
 
             # Check the response
             if response and hasattr(response, 'data'):
-                membership.payment_proof = unique_file_name  # Store the file path in the database
+                # Construct the full URL for the uploaded file
+                full_url = f"https://mljsnqwcbdunemonnwif.supabase.co/storage/v1/object/public/paymentproofs/payment_proofs/{user.uid}/{unique_file_name}"
+                membership.payment_proof = full_url  # Store the full URL in the database
                 membership.save()  # Save the updated membership instance
                 messages.success(request, 'Your membership application has been submitted.')
                 return redirect('membership_status')
