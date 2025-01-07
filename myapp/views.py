@@ -205,7 +205,7 @@ def apply_membership(request):
             response = supabase.storage.from_(bucket_name).upload(unique_file_name, file_content)
 
             # Check the response
-            if response.data:  # Check if the upload was successful
+            if response.error is None:  # Check if the upload was successful
                 membership.payment_proof = unique_file_name  # Store the file path in the database
                 membership.save()
                 messages.success(request, 'Your membership application has been submitted.')
