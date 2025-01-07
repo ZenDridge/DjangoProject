@@ -219,8 +219,6 @@ def apply_membership(request):
                 # Handle the case where the upload failed
                 error_message = response.message if hasattr(response, 'message') else 'Unknown error'
                 messages.error(request, f'Failed to upload payment proof: {error_message}')
-                
-            membership.save()
         else:
             # Print form errors for debugging
             print(form.errors)
@@ -565,10 +563,18 @@ def membership_delete(request, mid):
         # Store info for message
         user_name = membership.user.full_name
         
-        # Delete payment proof file if it exists
+        # Delete payment proof file from Supabase if it exists
         if membership.payment_proof:
-            if os.path.exists(membership.payment_proof.path):
-                os.remove(membership.payment_proof.path)
+            # Extract the file path from the URL
+            file_path = membership.payment_proof.split('/')[-1]  # Get the filename
+            bucket_name = 'paymentproofs'  # Ensure this matches your bucket name
+            
+            # Delete the file from Supabase
+            response = supabase.storage.from_(bucket_name).remove([file_path])
+            if response and response.get('status') == 200:
+                messages.success(request, f'Payment proof for {user_name} has been deleted.')
+            else:
+                messages.error(request, f'Failed to delete payment proof for {user_name}.')
         
         # Delete the membership record
         membership.delete()
