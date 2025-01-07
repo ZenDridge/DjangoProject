@@ -205,13 +205,18 @@ def apply_membership(request):
             response = supabase.storage.from_(bucket_name).upload(unique_file_name, file_content)
 
             # Check the response
-            if response.error is None:  # Check if the upload was successful
-                membership.payment_proof = unique_file_name  # Store the file path in the database
-                membership.save()
-                messages.success(request, 'Your membership application has been submitted.')
-                return redirect('membership_status')
+            if response:  # Check if the response is valid
+                # Assuming response has a 'data' attribute that indicates success
+                if hasattr(response, 'data'):
+                    membership.payment_proof = unique_file_name  # Store the file path in the database
+                    membership.save()
+                    messages.success(request, 'Your membership application has been submitted.')
+                    return redirect('membership_status')
+                else:
+                    # Handle the case where the upload failed
+                    messages.error(request, f'Failed to upload payment proof: {response.message if hasattr(response, "message") else "Unknown error"}')
             else:
-                messages.error(request, f'Failed to upload payment proof: {response.error}')
+                messages.error(request, 'No response received from the upload operation.')
 
     else:
         form = MembershipApplicationForm()
