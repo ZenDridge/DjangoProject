@@ -174,6 +174,8 @@ def usr_view(request):
 
 @login_required
 def apply_membership(request):
+    bucket_name = 'your_actual_bucket_name'  # Define your bucket name here
+
     # Check if user already has a pending or active membership
     existing_membership = Membership.objects.filter(
         user=request.user,
@@ -217,6 +219,8 @@ def apply_membership(request):
                     messages.error(request, f'Failed to upload payment proof: {response.message if hasattr(response, "message") else "Unknown error"}')
             else:
                 messages.error(request, 'No response received from the upload operation.')
+        else:
+            print(form.errors)  # Debugging output for form errors
 
     else:
         form = MembershipApplicationForm()
