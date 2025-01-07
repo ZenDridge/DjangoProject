@@ -26,86 +26,81 @@
         </div>
     </div>
 
-    <!-- My Events -->
-    <div class="dashboard-card mt-4">
-        <h3>My Events</h3>
-        <div class="event-list">
-            {% for event in user_events %}
-            <div class="event-item">
-                <h4>{{ event.title }}</h4>
-                <p><i class="far fa-calendar-alt"></i> {{ event.start|date:"F d, Y" }}</p>
-                <p>{{ event.description }}</p>
-                <div class="event-status">
-                    <span class="badge {% if event.status == 'completed' %}bg-success{% else %}bg-primary{% endif %}">
-                        {{ event.status|title }}
-                    </span>
-                </div>
+<div class="dashboard-card mt-4">
+    <h3>My Events & Participation</h3>
+    <div class="event-list">
+        <h5>My Events</h5>
+        {% for event in user_events %}
+        <div class="event-item">
+            <h4>{{ event.title }}</h4>
+            <p><i class="far fa-calendar-alt"></i> {{ event.start|date:"F d, Y" }}</p>
+            <p>{{ event.description }}</p>
+            <div class="event-status">
+                <span class="badge {% if event.status == 'completed' %}bg-success{% else %}bg-primary{% endif %}">
+                    {{ event.status|title }}
+                </span>
             </div>
-            {% empty %}
-            <p class="text-center text-muted">You haven't registered for any events yet</p>
-            {% endfor %}
         </div>
+        {% empty %}
+        <p class="text-center text-muted">You haven't registered for any events yet.</p>
+        {% endfor %}
+
+        <h5 class="mt-4">Events You Participated In or Viewed</h5>
+        {% for event in participated_events %}
+        <div class="event-item">
+            <h4>{{ event.title }}</h4>
+            <p><i class="far fa-calendar-alt"></i> {{ event.start|date:"F d, Y" }}</p>
+            <p>{{ event.description }}</p>
+            <p><strong>Role:</strong> 
+                {% if event.participants|length > 0 %}
+                    Participant
+                {% else %}
+                    Viewer
+                {% endif %}
+            </p>
+            <div class="event-status">
+                <span class="badge {% if event.status == 'completed' %}bg-success{% else %}bg-primary{% endif %}">
+                    {{ event.status|title }}
+                </span>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center text-muted">You haven't participated in or viewed any events yet.</p>
+        {% endfor %}
     </div>
 
-    <!-- Events Participated In or Viewed -->
-    <div class="dashboard-card mt-4">
-        <h3>Events You Participated In or Viewed</h3>
-        <div class="event-list">
-            {% for event in participated_events %}
-            <div class="event-item">
-                <h4>{{ event.title }}</h4>
-                <p><i class="far fa-calendar-alt"></i> {{ event.start|date:"F d, Y" }}</p>
-                <p>{{ event.description }}</p>
-                <p><strong>Role:</strong> 
-                    {% if event.participants|length > 0 %}
-                        Participant
-                    {% else %}
-                        Viewer
-                    {% endif %}
-                </p>
-                <div class="event-status">
-                    <span class="badge {% if event.status == 'completed' %}bg-success{% else %}bg-primary{% endif %}">
-                        {{ event.status|title }}
-                    </span>
-                </div>
-            </div>
-            {% empty %}
-            <p class="text-center text-muted">You haven't participated in or viewed any events yet</p>
-            {% endfor %}
-        </div>
+    <div class="d-flex justify-content-between mb-3 mt-4">
+        <h5 class="mb-0">Upcoming Events</h5>
     </div>
-
-    <div class="dashboard-card mt-4">
-        <h3>Event Management</h3>
-        <div class="d-flex justify-content-between mb-3">
-            <h5 class="mb-0">Upcoming Events</h5>
-        </div>
-        <div class="table-responsive">
-            <table class="table table-sm">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Start</th>
-                        <th>End</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for event in events %}
-                    <tr>
-                        <td>{{ event.title }}</td>
-                        <td>{{ event.start|date:"M d, Y H:i" }}</td>
-                        <td>{{ event.end|date:"M d, Y H:i" }}</td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td colspan="4">No upcoming events.</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+    <div class="table-responsive">
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in events %}
+                <tr>
+                    <td>{{ event.title }}</td>
+                    <td>{{ event.start|date:"M d, Y H:i" }}</td>
+                    <td>{{ event.end|date:"M d, Y H:i" }}</td>
+                    <td>
+                        <!-- Add action buttons here if needed -->
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">No upcoming events.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
+</div>
     
     <div class="card mb-4">
         <div class="card-header">
