@@ -195,7 +195,7 @@ def apply_membership(request):
 
             # Upload the payment proof to Supabase Storage
             payment_proof = request.FILES['payment_proof']
-            file_name = f'payment_proofs/{request.user.id}/{payment_proof.name}'  # Create a unique file path
+            file_name = f'payment_proofs/{request.user.uid}/{payment_proof.name}'  # Create a unique file path
             
             # Upload the file
             response = supabase.storage.from_('your-bucket-name').upload(file_name, payment_proof)
