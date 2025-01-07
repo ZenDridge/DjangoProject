@@ -25,7 +25,36 @@
             </div>
         </div>
     </div>
+    
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">Membership Status</h5>
+        </div>
+        <div class="card-body">
+            {% if membership %}
+                {% if membership.status == 'active' %}
+                    <div class="alert alert-success">
+                        <h6>Active Member</h6>
+                        <p>Valid until: {{ membership.end_date|date:"F d, Y" }}</p>
+                        <p>Days remaining: {{ days_remaining }}</p>
+                    </div>
+                {% elif membership.status == 'pending' %}
+                    <div class="alert alert-warning">
+                        <h6>Pending Application</h6>
+                        <p>Submitted on: {{ membership.created_at|date:"F d, Y" }}</p>
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="alert alert-info">
+                    <h6>No Active Membership</h6>
+                    <p>Apply for membership to access exclusive features!</p>
+                    <a href="{% url 'apply_membership' %}" class="btn btn-primary">Apply Now</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
 
+    
 <div class="dashboard-card mt-4">
     <h3>My Events & Participation</h3>
     <div class="event-list">
@@ -102,33 +131,6 @@
     </div>
 </div>
     
-    <div class="card mb-4">
-        <div class="card-header">
-            <h5 class="mb-0">Membership Status</h5>
-        </div>
-        <div class="card-body">
-            {% if membership %}
-                {% if membership.status == 'active' %}
-                    <div class="alert alert-success">
-                        <h6>Active Member</h6>
-                        <p>Valid until: {{ membership.end_date|date:"F d, Y" }}</p>
-                        <p>Days remaining: {{ days_remaining }}</p>
-                    </div>
-                {% elif membership.status == 'pending' %}
-                    <div class="alert alert-warning">
-                        <h6>Pending Application</h6>
-                        <p>Submitted on: {{ membership.created_at|date:"F d, Y" }}</p>
-                    </div>
-                {% endif %}
-            {% else %}
-                <div class="alert alert-info">
-                    <h6>No Active Membership</h6>
-                    <p>Apply for membership to access exclusive features!</p>
-                    <a href="{% url 'apply_membership' %}" class="btn btn-primary">Apply Now</a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
 </div>
 {% endblock %}
 
