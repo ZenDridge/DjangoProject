@@ -134,9 +134,18 @@ class MembershipApplicationForm(forms.ModelForm):
         }
 
     def clean_payment_phone(self):
-        phone = self.cleaned_data.get('payment_phone')
-        if not phone.isdigit():
-            raise forms.ValidationError("Enter a valid phone number consisting of digits only.")
-        if len(phone) < 10:  # Adjust this based on your requirements
-            raise forms.ValidationError("Phone number must be at least 10 digits long.")
-        return phone
+    phone = self.cleaned_data.get('payment_phone')
+    
+    # Check if the phone number is None or empty
+    if phone is None or phone.strip() == '':
+        raise forms.ValidationError("This field is required.")
+    
+    # Check if the phone number consists only digits
+    if not phone.isdigit():
+        raise forms.ValidationError("Enter a valid phone number consisting of digits only.")
+    
+    # Check the length of the phone number
+    if len(phone) < 10:  # Adjust this based on your requirements
+        raise forms.ValidationError("Phone number must be at least 10 digits long.")
+    
+    return phone
