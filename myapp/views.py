@@ -19,6 +19,8 @@ from .forms import UserForm, EventForm, AccountEditForm, MembershipApplicationFo
 from .permissions import adm_req, stf_req
 from supabase import create_client, Client
 
+SUPABASE_URL = 'https://mljsnqwcbdunemonnwif.supabase.co'
+SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1sanNucXdjYmR1bmVtb25ud2lmIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczNTg4MDU5OCwiZXhwIjoyMDUxNDU2NTk4fQ.WCPSuoapf212OzEk64NDm15pqDJ_H-W_T4e9mY1tz_8'
 supabase: Client = create_client(settings.SUPABASE_URL, settings.SUPABASE_KEY)
 
 def home(request):
