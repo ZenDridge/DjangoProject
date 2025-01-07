@@ -173,7 +173,7 @@ def usr_view(request):
 
 @login_required
 def apply_membership(request):
-    bucket_name = 'your_actual_bucket_name'  # Define your bucket name here
+    bucket_name = 'paymentproofs'  # Ensure this is your actual bucket name
 
     # Check if user already has a pending or active membership
     existing_membership = Membership.objects.filter(
@@ -191,42 +191,40 @@ def apply_membership(request):
     if request.method == 'POST':
         form = MembershipApplicationForm(request.POST, request.FILES)
         if form.is_valid():
+            # Create a membership instance but don't save it yet
             membership = form.save(commit=False)
             membership.user = request.user
             membership.status = 'pending'
             membership.payment_status = 'pending'
-            membership.save()
+            membership.save()  # Save the membership instance to the database
 
-            # Use uid instead of id
+            # Handle the payment proof file
             payment_proof = request.FILES['payment_proof']
             # Generate a unique file name using UUID
             unique_file_name = f'payment_proofs/{request.user.uid}/{uuid.uuid4()}_{payment_proof.name}'  # Create a unique file path
             
-            # Read the file content and upload it
+            # Read the file content and upload it directly to Supabase
             file_content = payment_proof.read()  # Read the content of the InMemoryUploadedFile
             response = supabase.storage.from_('paymentproofs').upload(unique_file_name, file_content)
 
             # Check the response
-            if response:  # Check if the response is valid
-                # Assuming response has a 'data' attribute that indicates success
-                if hasattr(response, 'data'):
-                    membership.payment_proof = unique_file_name  # Store the file path in the database
-                    membership.save()
-                    messages.success(request, 'Your membership application has been submitted.')
-                    return redirect('membership_status')
-                else:
-                    # Handle the case where the upload failed
-                    messages.error(request, f'Failed to upload payment proof: {response.message if hasattr(response, "message") else "Unknown error"}')
+            if response and hasattr(response, 'data'):
+                membership.payment_proof = unique_file_name  # Store the file path in the database
+                membership.save()  # Save the updated membership instance
+                messages.success(request, 'Your membership application has been submitted.')
+                return redirect('membership_status')
             else:
-                messages.error(request, 'No response received from the upload operation.')
+                # Handle the case where the upload failed
+                messages.error(request, f'Failed to upload payment proof: {response.message if hasattr(response, "message") else "Unknown error"}')
         else:
-            print(form.errors)  # Debugging output for form errors
+            # Print form errors for debugging
+            print(form.errors)
 
     else:
         form = MembershipApplicationForm()
     
     return render(request, 'membership/apply.html', {'form': form})
-
+    
 @login_required
 def membership_status(request):
     membership = Membership.objects.filter(user=request.user).order_by('-created_at').first()
